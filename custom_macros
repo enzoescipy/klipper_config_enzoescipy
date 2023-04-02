@@ -1,0 +1,18 @@
+#newer macros
+
+[gcode_macro SET_SPEED_AND_EXTRUDE]
+description: change the speed AND extrude percentage as same param.
+gcode:
+  # {% set percent = params.PERCEN|T|default(100)|float %}
+  # M220 S{percent}
+  # M221 S{percent}
+  {% set bed_temp = params.TEMPERATURE|default(40)|float %}
+  M140 S{bed_temp}
+
+
+
+#overriding macros
+[gcode_macro M109]
+description: change M109 to just TEMPERATURE_WAIT 
+gcode:
+  TEMPERATURE_WAIT SENSOR = extruder [MINIMUM=<target>] [MAXIMUM=<target>]
